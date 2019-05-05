@@ -1,0 +1,35 @@
+--- 
+# Configure HDFS
+- name: Create name
+  command: "{{item}}"
+  with_items:
+      - mkdir /datos
+      - mkdir /datos/namenode
+      - mkdir /datos/datanode
+      - chown -R vagrant:vagrant /datos
+      - chown -R vagrant:vagrant /opt/{{hadoop_version}}
+  become: yes
+  become_method: sudo
+
+- name: Configure namenode
+  copy:
+    src: core-site.xml
+    dest: /opt/{{hadoop_version}}/etc/hadoop
+    owner: vagrant
+    group: vagrant
+    mode: 0644
+
+- name: Configure HDFS
+  copy:
+    src: hdfs-site.xml
+    dest: /opt/{{hadoop_version}}/etc/hadoop
+    owner: vagrant
+    group: vagrant
+    mode: 0644
+- name: Format filesystem && Start HDFS
+  command: "{{item}}"
+  with_items:
+    - hadoop namenode -format
+    - /opt/{{hadoop_version}}/sbin/start-dfs.sh
+  become: yes
+  become_method: sudo

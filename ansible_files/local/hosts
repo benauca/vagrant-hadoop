@@ -1,0 +1,31 @@
+[local_development]
+localhost
+
+[local_development:vars]
+#proxy
+#set_proxy=true
+#http_proxy=http://proxyapps.gsnet.corp:80
+#https_proxy=http://proxyapps.gsnet.corp:80
+#no_proxy=localhost,127.0.0.1,gsnetcloud.corp,gsnet.corp,192.168.1.101
+
+#docker
+ansible_ssh_user=vagrant
+docker_volumes_root=/opt/docker-volumes
+docker_daemon_tcp_port=2375
+docker_registry_url=https://registry.lvtc.gsnet.corp
+docker_registry_username=almregistry
+
+#ldap
+ldap_server=ldapgrupo.aacc.gs.corp
+ldap_bind_dn=uid=alm,ou=Administradores,o=Grupo Santander
+ldap_base=o=Grupo Santander,o=Grupo Santander
+ldap_group_base=ou=alm,cn=SERENITY,o=Grupo Santander
+ldap_group_filter=(&(cn={0})(objectClass=groupOfNames))
+ldap_user_search=corpaliaslocal={0}
+ldap_display_name=givenname
+ldap_pass=FvuZ0J8lvop#YmJi5Apb
+
+#smtp configuration
+smtp_server=smtp.eng.gsnetcloud.corp
+smtp_server_port=25
+smtp_domain=gsnetcloud.corp
