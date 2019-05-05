@@ -1,0 +1,20 @@
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+	<property>
+		<!-- Número de nodos en los que vamos a replicar. 1 = No replicar -->
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+	<property>
+		<!-- Dónde se encuentra la información del maestro donde vamos a tener los metadatos.-->
+		<name>dfs.namenode.name.dir</name>
+		<value>/datos/namenode</value>
+	</property>
+	<property>
+		<!-- En cada esclavo, donde se guardan los datos. Cuando tengamos un cluster con nodos maestro ey esclavos. En el maestro sólo tendremos
+el directorio anterior, y en los esclavos el siguiente -->
+		<name>dfs.datanode.data.dir</name>
+		<value>/datos/datanode</value>
+	</property>
+</configuration>

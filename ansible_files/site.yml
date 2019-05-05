@@ -1,0 +1,5 @@
+---
+- hosts: all
+  roles:
+    - { role: local_development,
+        tags: [ 'local_development' ] }

@@ -1,0 +1,66 @@
+--- 
+# Update System
+- name: Update epel-release
+  yum: name='epel-release' state='present'
+  become: yes
+  become_method: sudo
+## 2.- Install Java version
+- name: Install Java
+  yum: name=java-1.8.0-openjdk state='latest'
+  become: yes
+  become_method: sudo
+#- name: Download file and force basic auth
+#  get_url:
+#      url: http://www-us.apache.org/dist/hadoop/common/hadoop-2.7.6/hadoop-2.7.6.tar.gz
+#      dest: /home/vagrant
+#      force_basic_auth: yes
+- name: Unzip
+  command: tar -zxvf /home/vagrant/hadoop-2.7.6.tar.gz -C /opt
+  become: true
+  become_method: sudo
+- name: Replace 
+  lineinfile: 
+    state: 'present'
+    path: /opt/hadoop-2.7.6/etc/hadoop/hadoop-env.sh 
+    regexp: '^export JAVA_HOME=${JAVA_HOME}/e'
+    line: 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")'
+    insertafter: '^#export JAVA_HOME=${JAVA_HOME} '
+  become: yes
+  become_method: sudo
+- name: Add Path of the hadoop
+  shell: "{{ item }}"
+  with_items:
+      - echo "export PATH=/opt/hadoop-2.7.6/bin:$PATH" | sudo tee -a /etc/profile
+      - source /etc/profile
+  become: yes
+  become_method: sudo
+- name: make folder source
+  file:
+    state: directory
+    path: ~/source
+    mode: 0755
+- name: copy file source
+  copy:
+    src: "{{ item }}"
+    dest: ~/source 
+  with_items:
+    - /opt/hadoop-2.7.6/etc/hadoop/capacity-scheduler.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/core-site.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/hadoop-policy.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/hdfs-site.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/httpfs-site.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/kms-acls.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/kms-site.xml
+    - /opt/hadoop-2.7.6/etc/hadoop/yarn-site.xml
+  become: yes
+  become_method: sudo
+- name: Add IP address of all hosts to all hosts
+  lineinfile:
+    dest: /etc/hosts
+    line: "var=hostvars[inventory_hostname]['ansible_default_ipv4']['address'] nodo1"
+    state: present
+- name: create data Test
+  file:
+    path: /tmp/entrada
+    state: directory
+ 
