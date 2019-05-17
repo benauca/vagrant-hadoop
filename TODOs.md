@@ -1,12 +1,26 @@
 TODOs
 ===
+- Configurar Puertos
+    - 19841
+    - 19888
+
 # Crea un nodo hadoop
 # owner: benauca
 # Steps: 
 # Test: hadoop jar /opt/hadoop-2.7.6/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.6.jar grep ~/source ~/output 'principal[.]*'
 #  TODOs:
-#        trabajar con versiones como vars
-#        Revisar si hace falta el uso de algún template
+# 		HANDLERs
+			- Fortmat HDFs [ hadoop namenode -format ]
+			- Start HDFS [ /opt/hadoop..../sbin/start-dfs.sh ]
+			- Start YARN [ start-yarn.sh  ]
+					./mr-jobhistory-daemon.sh start historyserver 
+            - Entrar en modo SAFE. Esto impide que se trabaje con el cluster. Es como entrar en modo mantenimiento 
+                    hdfs  dfsadmin -safemode enter
+            -  Checkpoint 
+                    hdfs dfsadmin -saveNamespace 
+            - Volver a entrar en modo normal 
+                    hdfs dfsadmin -safemode leave 
+#       Revisar si hace falta el uso de algún template
 #       Exportar para
 #		Crear usuario hadoop
 #		Modificar .bashrc (a nivel de usuario) para el usuario hadoop (o /etc/bashrc para hacerlas globales

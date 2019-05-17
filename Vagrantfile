@@ -9,6 +9,9 @@ Vagrant.configure("2") do |config|
 	config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 	#config.vm.network "public_network", bridge: "Intel(R) Dual Band Wireless-AC 7260", ip: "192.168.1.101"
 	config.vm.network "forwarded_port", guest: 50070, host: 50070, host_ip: "127.0.0.1" #Hadoop Administrator
+	config.vm.network "forwarded_port", guest: 8088, host: 8088, host_ip: "127.0.0.1" #Hadoop Administrator
+	config.vm.network "forwarded_port", guest: 8042, host: 8042, host_ip: "127.0.0.1" #Hadoop Administrator
+	config.vm.network "forwarded_port", guest: 33972, host: 33972, host_ip: "127.0.0.1" #Hadoop Administrator
 	config.vm.provider "virtualbox" do |vb_development|
 	vb_development.memory = "5000"
 	end

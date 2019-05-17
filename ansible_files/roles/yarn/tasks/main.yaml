@@ -1,0 +1,17 @@
+--- 
+# Configure YARN & MAP REduce
+- name: Configure YARN
+  copy:
+    src: yarn-site.xml
+    dest: /opt/{{hadoop_version}}/etc/hadoop
+    owner: vagrant
+    group: vagrant
+    mode: 0644
+
+- name: Configure MapRed
+  copy:
+    src: mapred-site.xml
+    dest: /opt/{{hadoop_version}}/etc/hadoop
+    owner: vagrant
+    group: vagrant
+    mode: 0644

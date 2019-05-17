@@ -231,3 +231,8 @@ Cuando arrancamos un entorno hadoop podemos ver que todo esta correctamenet ejec
 	</head>
 	</html>
 	````
+
+Practicas
+===
+- [Trabajar con fsimage y edits](./4-Practicas-BigData-original.hdfs-site.pdf)
+- [Trabajar con HDFS](./HDFS.md)

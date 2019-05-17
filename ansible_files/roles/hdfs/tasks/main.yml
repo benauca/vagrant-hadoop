@@ -26,10 +26,10 @@
     owner: vagrant
     group: vagrant
     mode: 0644
-- name: Format filesystem && Start HDFS
-  command: "{{item}}"
-  with_items:
-    - hadoop namenode -format
-    - /opt/{{hadoop_version}}/sbin/start-dfs.sh
-  become: yes
-  become_method: sudo
+# - name: Format filesystem && Start HDFS
+#   command: "{{item}}"
+#  with_items:
+#     - hadoop namenode -format
+#     - /opt/{{hadoop_version}}/sbin/start-dfs.sh
+#   become: yes
+#   become_method: sudo
